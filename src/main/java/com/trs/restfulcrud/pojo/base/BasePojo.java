@@ -1,7 +1,7 @@
 package com.trs.restfulcrud.pojo.base;
 
 /**
- * Description: TODO
+ * Description: 基本pojo类
  * Project: seasonRESTfulCRUD
  *
  * @author : Julian

@@ -9,7 +9,7 @@ import javax.validation.OverridesAttribute;
 import java.util.List;
 
 /**
- * Description: TODO
+ * Description:
  * Project: seasonRESTfulCRUD
  *
  * @author : Julian
@@ -19,10 +19,10 @@ import java.util.List;
 public class CriminalService {
 
     final
-    CriminalDao<Criminal> criminalDao;
+    CriminalDao criminalDao;
 
     @Autowired
-    public CriminalService(CriminalDao<Criminal> criminalDao) {
+    public CriminalService(CriminalDao criminalDao) {
         this.criminalDao = criminalDao;
     }
 
@@ -34,7 +34,7 @@ public class CriminalService {
         return criminalDao.update(criminal);
     }
 
-    public Object findById(Long  id){
+    public Criminal findById(Long  id){
         return criminalDao.findById(id);
     }
 

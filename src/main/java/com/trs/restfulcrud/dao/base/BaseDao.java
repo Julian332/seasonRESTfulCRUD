@@ -1,15 +1,9 @@
 package com.trs.restfulcrud.dao.base;
 
-import com.season.common.ClassKit;
 import com.season.orm.dao.ISeasonDao;
-import com.season.orm.dao.Table;
-import com.season.orm.dao.dialect.AbstractDialect;
 import com.trs.restfulcrud.pojo.Criminal;
-import com.trs.restfulcrud.pojo.base.BasePojo;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -17,43 +11,23 @@ import java.util.List;
  * Project: seasonRESTfulCRUD
  *
  * @author : Julian
- * Create Time:2019/12/3 10:08
+ * Create Time:2019/12/4 13:32
  */
-public abstract class BaseDao<T> {
+public abstract class BaseDao {
 
     @Autowired
     protected ISeasonDao seasonDao;
 
-    private final Class<T> entityClass;
-    private final String currTableName;
-    private final Table table;
+    public abstract void clearCache(Criminal criminal);
 
-
-    public BaseDao() {
-        Type genType = getClass().getGenericSuperclass();
-        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-        entityClass = (Class) params[0];
-        table = AbstractDialect.getTable(entityClass);
-        currTableName = table.getTableName();
-    }
-
-    /**
-     * Description 清理缓存
-     *
-     * @param t 传入的pojo类
-     * @return void
-     * @author julian cao
-     */
-    protected abstract void clearCache(T t);
-
-    public T save(T t) {
-        if (null == t) {
+    public Criminal save(Criminal criminal) {
+        if (null == criminal) {
             return null;
         }
-        return seasonDao.save(t);
+        return seasonDao.save(criminal);
     }
 
-    public Integer update(T t) {
+    public Integer update(Criminal t) {
         if (null == t) {
             return 0;
         }
@@ -62,23 +36,22 @@ public abstract class BaseDao<T> {
         return count;
     }
 
-    public Criminal findById( Long id) {
+    public Criminal findById(Long id) {
         if (null == id) {
             return null;
         }
         return seasonDao.findById(Criminal.class, id);
     }
 
-    public List<Criminal> findAll(){
+    public List<Criminal> findAll() {
         return seasonDao.find(Criminal.class, "select * from criminal  ", null);
     }
 
-    public Integer delete(T t) {
+    public Integer delete(Criminal t) {
         if (null == t) {
             return 0;
         }
-        Criminal criminal = (Criminal) t;
-        if (null == findById( criminal.getId())) {
+        if (null == findById(t.getId())) {
             return 0;
         }
         return seasonDao.delete(t);
@@ -89,13 +62,9 @@ public abstract class BaseDao<T> {
         if (null == id) {
             return 0;
         }
-        T t = ClassKit.newInstance(entityClass);
-        if (t instanceof BasePojo) {
-            return seasonDao.deleteById(Criminal.class, id);
-        }
-        return 0;
+        return seasonDao.deleteById(Criminal.class, id);
+
 
     }
-
 
 }

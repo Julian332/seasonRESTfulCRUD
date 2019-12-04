@@ -10,10 +10,10 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
- * Description: TODO
+ * Description:
  * Project: seasonRESTfulCRUD
  *
  * @author : Julian
@@ -36,13 +36,13 @@ public class Criminal extends BasePojo {
     @Pattern(regexp = "[男女无]",message = "性别只能为男女无中的一个")
     private String gender;
 
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss.SSS")
-    private LocalDate jailTime;
+//    @JSONField(format = "yyyy-MM-dd HH:mm:ss.SSS")
+    private Date jailTime;
 
     @Length(min = 0,max = 250,message = "备注的长度为0-250")
     private String comment;
 
-    public Criminal(Long id, String name, Integer age, String gender, LocalDate jailTime, String comment) {
+    public Criminal(Long id, String name, Integer age, String gender, Date jailTime, String comment) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -90,11 +90,11 @@ public class Criminal extends BasePojo {
         this.gender = gender;
     }
 
-    public LocalDate getJailTime() {
+    public Date getJailTime() {
         return jailTime;
     }
 
-    public void setJailTime(LocalDate jailTime) {
+    public void setJailTime(Date jailTime) {
         this.jailTime = jailTime;
     }
 
