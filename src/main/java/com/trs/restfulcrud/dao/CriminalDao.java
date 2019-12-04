@@ -1,7 +1,6 @@
 package com.trs.restfulcrud.dao;
 
 import com.trs.restfulcrud.dao.base.BaseDao;
-import com.trs.restfulcrud.dao.base.BaseDao0;
 import com.trs.restfulcrud.pojo.Criminal;
 import org.springframework.stereotype.Repository;
 

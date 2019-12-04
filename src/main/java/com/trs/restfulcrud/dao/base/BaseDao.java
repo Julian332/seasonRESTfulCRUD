@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
- * Description: TODO
+ * Description: 基础dao类
  * Project: seasonRESTfulCRUD
  *
  * @author : Julian
